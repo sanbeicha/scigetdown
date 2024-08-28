@@ -6,9 +6,9 @@ block_cipher = None
 
 a = Analysis(
     ['app.py'],
-    pathex=[],
+    pathex=['.'],
     binaries=[],
-    datas=[],
+    datas=[('version.txt', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -26,7 +26,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='generalimage',
+    name='SciHuPapersDownLoader',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -47,11 +47,11 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='generalimage',
+    name='SciHuPapersDownLoader',
 )
 app = BUNDLE(
     coll,
-    name='generalimage.app',
+    name='SciHuPapersDownLoader.app',
     icon='app.icns',
     bundle_identifier=None,
 )
