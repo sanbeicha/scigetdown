@@ -16,7 +16,7 @@ import re
 import warnings
 
 # from scholarly import scholarly
-from scihub_cn.scihub import SciHub
+# from scihub_cn.scihub import SciHub
 
 from .index_ui import Ui_MainWindow
 
@@ -38,6 +38,8 @@ class Index(QMainWindow, Ui_MainWindow):
         # self.main.login_ui.login_win.show()
 
     def getscidown(self) -> None:
+        pass
+    """
         keyword = 'Mixed Reality Surgery'
 
         # search = scholarly.search_pubs(keyword)
@@ -66,3 +68,4 @@ class Index(QMainWindow, Ui_MainWindow):
                 print(f'{downloaded + 1}/{total}', filename)
             except Exception as e:
                 warnings.warn(str(e))
+    """
