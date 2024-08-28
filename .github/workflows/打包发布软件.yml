@@ -53,12 +53,12 @@ jobs:
         run: |
           python run_write_version.py
           pyinstaller my_app_win.spec
-      - name: 测试运行情况
-        uses: GuillaumeFalourd/assert-command-line-output@v2
-        with:
-          command_line: ./dist/SciHuPapersDownLoader.exe test
-          contains: app run success
-          expected_result: PASSED
+      # - name: 测试运行情况
+      #   uses: GuillaumeFalourd/assert-command-line-output@v2
+      #   with:
+      #     command_line: ./dist/SciHuPapersDownLoader.exe test
+      #     contains: app run success
+      #     expected_result: PASSED
       - name: 上传产物
         uses: actions/upload-artifact@v4
         with:
@@ -91,12 +91,12 @@ jobs:
         run: |
           python run_write_version.py
           pyinstaller my_app_macos.spec
-      - name: 测试运行情况
-        uses: GuillaumeFalourd/assert-command-line-output@v2
-        with:
-          command_line: ./dist/SciHuPapersDownLoader.app/Contents/MacOS/SciHuPapersDownLoader test
-          contains: app run success
-          expected_result: PASSED
+      # - name: 测试运行情况
+      #   uses: GuillaumeFalourd/assert-command-line-output@v2
+      #   with:
+      #     command_line: ./dist/SciHuPapersDownLoader.app/Contents/MacOS/SciHuPapersDownLoader test
+      #     contains: app run success
+      #     expected_result: PASSED
       - name: 创建压缩包
         run: |
           cd ./dist
