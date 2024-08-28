@@ -1,10 +1,11 @@
 
 
 import re
+from typing import Any
 import requests
 
 
-def 获取最新版本号和下载地址(project_name):
+def 获取最新版本号和下载地址(project_name) -> dict[str, Any]:
     # 通过访问最新的页面 获取版本号和下载地址和更新内容
     # 镜像地址也可以自己造一个 https://quiet-boat-a038.duolabmeng.workers.dev/
     # url = f"https://ghproxy.com/https://github.com/{project_name}/releases/latest"
@@ -16,7 +17,7 @@ def 获取最新版本号和下载地址(project_name):
     return 解析网页信息(jsondata.text, project_name)
 
 
-def 解析网页信息(网页, project_name):
+def 解析网页信息(网页, project_name) -> dict[str, Any]:
     版本号 = 网页.find('<span class="ml-1">')
     版本号 = 网页[版本号 + len('<span class="ml-1">'):]
     版本号 = 版本号[:版本号.find('</span>')].strip()
