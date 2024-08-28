@@ -29,12 +29,11 @@ class Ui_MainWindow(object):
 
         # 创建一个按钮
         # 使用翻译后的文本
-        button_text = QCoreApplication.translate("MainWindow", "Click Me", None)
+        button_text = QCoreApplication.translate("MainWindow", "点击下载", None)
         button = QPushButton(button_text)
 
         # 将按钮添加到布局中
         self.verticalLayout.addWidget(button)
-
 
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -50,6 +49,6 @@ class Ui_MainWindow(object):
         QMetaObject.connectSlotsByName(MainWindow)
 
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, MainWindow) -> None:
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "SciHub文献下载", None))
         self.statusbar.showMessage(QCoreApplication.translate("MainWindow", "欢迎使用博航纳影™开发的这款SciHub文献批量下载软件.", None))
