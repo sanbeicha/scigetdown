@@ -14,7 +14,7 @@ class 窗口_更新软件(QDialog):
 
     def __init__(self,
                  Github项目名称="sanbeicha/qtAutoUpdateApp",
-                 应用名称="my_app.app",
+                 应用名称="my_app",
                  当前版本号="1.0",
                  官方网址="https://github.com/sanbeicha/qtAutoUpdateApp") -> None:
         super(窗口_更新软件, self).__init__()
