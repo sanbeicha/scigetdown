@@ -44,4 +44,4 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "博航纳影™", None))
         # self.pushButton.setText(QCoreApplication.translate("MainWindow", "退出登录", None))
-        self.statusbar.showMessage(QCoreApplication.translate("MainWindow", "欢迎使用博航纳影™", None))
+        self.statusbar.showMessage(QCoreApplication.translate("MainWindow", "欢迎使用博航纳影™的这款软件", None))
