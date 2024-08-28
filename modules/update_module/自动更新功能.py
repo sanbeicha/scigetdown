@@ -183,7 +183,9 @@ class 下载文件线程类(QThread):
 
 
 class 检查更新线程(QThread):
-    def __init__(self, Github项目名称="sanbeicha/qtAutoUpdateApp", 回调函数=None):
+    def __init__(self,
+                 Github项目名称="sanbeicha/qtAutoUpdateApp",
+                 回调函数=None) -> None:
         super(检查更新线程, self).__init__()
         # 绑定线程开始事件
         self.started.connect(self.ui_开始)
@@ -192,15 +194,15 @@ class 检查更新线程(QThread):
         self.Github项目名称 = Github项目名称
         self.回调函数 = 回调函数
 
-    def run(self):
+    def run(self) -> None:
         data = 获取最新版本号和下载地址(self.Github项目名称)
         self.数据 = data
 
-    def ui_开始(self):
+    def ui_开始(self) -> None:
         pass
         # print("开始检查更新")
 
-    def ui_结束(self):
+    def ui_结束(self) -> None:
         # data = json.dumps(self.数据, indent=4, ensure_ascii=False)
         # print("检查更新结果", data)
         self.回调函数(self.数据)
