@@ -1,0 +1,35 @@
+# UTF-8
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    # filevers和prodvers应该始终是包含四个项的元组
+    filevers=(0, 1, 0, 0),  # 文件版本
+    prodvers=(0, 1, 0, 0),  # 产品版本
+    mask=0x3f,
+    flags=0x0,
+    OS=0x4,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+    ),
+  kids=[
+    StringFileInfo(
+      [
+      StringTable(
+        u'040904B0',
+        [
+          StringStruct(u'CompanyName', u'上海博航纳影信息科技有限公司'),  # 发布者名称
+          StringStruct(u'FileDescription', u'文件描述'),
+          StringStruct(u'FileVersion', u'0.0.1'),
+          StringStruct(u'InternalName', u'博航纳影'),
+          StringStruct(u'LegalCopyright', u'© 博航纳影 版权所有'),  # 版权信息
+          StringStruct(u'OriginalFilename', u'博航纳影.exe'),
+          StringStruct(u'ProductName', u'博航纳影'),
+          StringStruct(u'ProductVersion', u'0.0.1'),
+          StringStruct('BuildDate', u'20240828'),
+        ]
+      )
+    ]
+    ),
+    VarFileInfo([VarStruct(u'Translation', [2052, 1033])])
+  ]
+)
