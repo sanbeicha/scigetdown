@@ -12,6 +12,11 @@
 
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QMainWindow
+import re
+import warnings
+
+# from scholarly import scholarly
+from scihub_cn.scihub import SciHub
 
 from .index_ui import Ui_MainWindow
 
@@ -33,15 +38,10 @@ class Index(QMainWindow, Ui_MainWindow):
         # self.main.login_ui.login_win.show()
 
     def getscidown(self) -> None:
-        import re
-        import warnings
-
-        from scholarly import scholarly
-        from scihub.util.download import SciHub
-
         keyword = 'Mixed Reality Surgery'
 
-        search = scholarly.search_pubs(keyword)
+        # search = scholarly.search_pubs(keyword)
+        search = ""
         scihub = SciHub()
 
         downloaded, total = 0, 20
