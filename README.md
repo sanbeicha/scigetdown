@@ -46,6 +46,16 @@ pyinstaller -F --hidden-import=PySide6.QtSvg main.py
 
 上述命令中，`--hidden-import`选项告诉`PyInstaller`在打包过程中导`入PySide6.QtSvg`模块。这样，打包后的可执行文件就可以正确地运行了。
 
+#### 打包命令说明
+
+```bash
+pyinstaller --onefile --windowed --icon "app.icns" "my_app.py"
+
+pyinstaller --noconfirm --windowed --icon "app.icns" "my_app.py"
+
+pyinstaller --noconfirm --onefile --windowed  "C:\python\qtAutoUpdateApp\my_app.py"
+```
+
 ### 4、解决打包过程中的问题
 
 在打包过程中，有时会遇到一些问题，例如打包后的可执行文件无法正常运行，或者缺少某些依赖库等。这些问题通常可以通过查看`PyInstaller`生成的日志文件来解决。`PyInstaller`会在打包过程中生成一个名为`build.log`的日志文件，其中包含了打包过程中的详细信息。你可以打开这个日志文件，查看其中的错误信息，然后根据错误信息来解决问题。
