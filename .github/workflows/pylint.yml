@@ -1,4 +1,4 @@
-name: Pylint
+name: Pylint格式检查
 
 on: [push]
 
