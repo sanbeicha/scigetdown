@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='博航纳影',
+    name='SciHuPapersDownLoader',
     icon='app.ico',
     debug=False,
     bootloader_ignore_signals=False,
@@ -49,4 +49,4 @@ coll = COLLECT(exe,
                a.datas,  # 注意这里也引用了 datas
                strip=False,
                upx=True,
-               name='博航纳影')
+               name='SciHuPapersDownLoader')
