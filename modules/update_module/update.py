@@ -15,7 +15,6 @@ import sys
 from PySide6.QtWidgets import QWidget, QLabel, QTextEdit, QVBoxLayout, QApplication, QMainWindow, QPushButton
 
 import version
-# from update_module import utils as 自动更新模块
 from . import utils as 自动更新模块
 
 全局_项目名称 = "sanbeicha/qtAutoUpdateApp"
@@ -25,11 +24,11 @@ from . import utils as 自动更新模块
 
 
 class Main(QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         super(Main, self).__init__()
         self.init_ui()
 
-    def 按钮_检查更新点击(self):
+    def 按钮_检查更新点击(self) -> None:
         # 弹出窗口
         self.winUpdate = 自动更新模块.窗口_更新软件(Github项目名称=全局_项目名称,
                                         应用名称=全局_应用名称,
