@@ -22,13 +22,22 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+
         MainWindow.setCentralWidget(self.centralwidget)
-        # self.pushButton = QPushButton(self.centralwidget)
-        # self.pushButton.setObjectName(u"pushButton")
-        # self.pushButton.setGeometry(QRect(730, 0, 60, 22))
+
+        self.verticalLayout = QVBoxLayout(self.centralwidget)
+
+        # 创建一个按钮
+        # 使用翻译后的文本
+        button_text = QCoreApplication.translate("MainWindow", "Click Me", None)
+        button = QPushButton(button_text)
+
+        # 将按钮添加到布局中
+        self.verticalLayout.addWidget(button)
+
+
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        # self.menubar.setGeometry(QRect(0, 0, 730, 22))
 
         init_menu(self.menubar)
 
@@ -42,6 +51,5 @@ class Ui_MainWindow(object):
 
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "博航纳影™", None))
-        # self.pushButton.setText(QCoreApplication.translate("MainWindow", "退出登录", None))
-        self.statusbar.showMessage(QCoreApplication.translate("MainWindow", "欢迎使用博航纳影™的这款软件", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "SciHub文献下载", None))
+        self.statusbar.showMessage(QCoreApplication.translate("MainWindow", "欢迎使用博航纳影™开发的这款SciHub文献批量下载软件.", None))
