@@ -53,7 +53,7 @@ class 窗口_更新软件(QDialog):
         if 系统_是否为window系统():
             self.压缩包路径 = os.path.abspath(self.下载文件夹路径 + f"/{self.应用名称}.exe")
 
-        print('查询最新版本')
+        # print('查询最新版本')
         self.检查更新线程 = 检查更新线程(Github项目名称, self.检查更新回到回调函数)
         self.检查更新线程.start()
 
@@ -64,7 +64,7 @@ class 窗口_更新软件(QDialog):
             event.ignore()
 
     def 检查更新回到回调函数(self, 数据) -> None:
-        print("数据", 数据)
+        # print("数据", 数据)
         最新版本 = 数据['版本号']
         self.ui.label_bbh.setText(f'最新版本: {最新版本} 当前版本: {self.当前版本号}')
         self.ui.textEdit.setHtml(数据['更新内容'])
