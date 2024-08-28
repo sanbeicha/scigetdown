@@ -28,12 +28,12 @@ def on_about_soft_clicked(self) -> None:
     msg_box = QMessageBox(self)
     msg_box.setWindowTitle("关于本软件")
     msg_box.setText(f"""
-软件版本：{全局_当前版本}.
-最新版本：.
+软件版本：{全局_当前版本}
+最新版本：
 发布日期：2024/08/28
-适用环境：Window及MacOS操作系统.
-版权归属：上海博航纳影信息科技有限公司.
-联系方式：.
+适用环境：Window及MacOS操作系统
+版权归属：上海博航纳影信息科技有限公司
+联系方式：
 """)
     msg_box.exec()
 
