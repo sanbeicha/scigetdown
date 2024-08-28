@@ -19,7 +19,7 @@ import version
 from .. import update_module as 自动更新模块
 
 全局_项目名称 = "sanbeicha/scigetdown"
-全局_应用名称 = "my_app.app"
+全局_应用名称 = "SciHuPapersDownLoader"
 全局_当前版本 = version.version
 全局_官方网址 = "https://github.com/sanbeicha/scigetdown"
 
