@@ -28,14 +28,10 @@ class Index(QMainWindow, Ui_MainWindow):
         self.main = main
         self.index_win = QMainWindow()
         self.setupUi(self.index_win)
-        # self.pushButton.clicked.connect(self.index_login_show)
         # 禁止窗口拉伸、禁用最大化按钮
         self.index_win.setFixedSize(self.index_win.width(),
                                     self.index_win.height())
 
-    def index_login_show(self) -> None:
-        self.index_win.close()
-        # self.main.login_ui.login_win.show()
 
     def getscidown(self) -> None:
         pass
