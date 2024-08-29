@@ -25,17 +25,15 @@ from .. import update_module as 自动更新模块
 
 def on_about_soft_clicked(self) -> None:
     # 创建一个 QMessageBox 对话框
-    data = 自动更新模块.自动更新读取版本模块.获取最新版本号和下载地址(全局_项目名称)
-    数据 = data
-    最新版本 = 数据['版本号']
-    发布时间 = 数据['发布时间']
+    # data = 自动更新模块.自动更新读取版本模块.获取最新版本号和下载地址(全局_项目名称)
+    # 数据 = data
+    # 最新版本 = 数据['版本号']
+    # 发布时间 = 数据['发布时间']
     msg_box = QMessageBox(self)
     msg_box.setWindowTitle("关于本软件")
     msg_box.setText(f"""
 软件版本：{全局_当前版本}
 发布日期：2024-08-28
-最新版本：{最新版本}
-发布日期：{发布时间}
 适用环境：Window及MacOS操作系统
 版权归属：上海博航纳影信息科技有限公司
 联系方式：
