@@ -2,6 +2,8 @@
 
 [![CodeTime Badge](https://img.shields.io/endpoint?style=social&color=222&url=https%3A%2F%2Fapi.codetime.dev%2Fshield%3Fid%3D26819%26project%3Dscigetdown%26in=0)](https://codetime.dev)
 
+[![timeashfly/scigetdown](https://gitee.com/timeashfly/scigetdown/widgets/widget_card.svg?colors=4183c4,ffffff,ffffff,e3e9ed,666666,9b9b9b)](https://gitee.com/timeashfly/scigetdown)
+
 ## 介绍
 
 本项目开发一款批量下载`SciHub`文章的桌面软件。
