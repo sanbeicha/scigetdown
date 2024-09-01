@@ -22,19 +22,18 @@ from .index_ui import Ui_MainWindow
 
 
 class Index(QMainWindow, Ui_MainWindow):
-# class Index(QWidget):
+    # class Index(QWidget):
     def __init__(self, main) -> None:
         super(Index, self).__init__()
         self.main = main
         self.index_win = QMainWindow()
         self.setupUi(self.index_win)
         # 禁止窗口拉伸、禁用最大化按钮
-        self.index_win.setFixedSize(self.index_win.width(),
-                                    self.index_win.height())
-
+        self.index_win.setFixedSize(self.index_win.width(), self.index_win.height())
 
     def getscidown(self) -> None:
         pass
+
     """
         keyword = 'Mixed Reality Surgery'
 

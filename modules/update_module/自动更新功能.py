@@ -14,15 +14,15 @@ from .自动更新读取版本模块 import 获取最新版本号和下载地址
 
 
 def 系统_是否为window系统() -> bool:
-    return platform.system().lower() == 'windows'
+    return platform.system().lower() == "windows"
 
 
 def 系统_是否为linux系统() -> bool:
-    return platform.system().lower() == 'linux'
+    return platform.system().lower() == "linux"
 
 
 def 系统_是否为mac系统() -> bool:
-    return platform.system().lower() == 'darwin'
+    return platform.system().lower() == "darwin"
 
 
 def 取自身路径Window() -> str:
@@ -42,29 +42,31 @@ def 取自身MacOs应用路径() -> Any | str:
         编译后路径 = os.path.abspath(".")
         # 调试的
         # 编译后路径 = "/Users/chensuilong/Desktop/pythonproject/autotest/dist/my_app.app/Contents/MacOS"
-    app目录 = 编译后路径[:编译后路径.rfind('/')]
-    app目录 = app目录[:app目录.rfind('/')]
-    父目录名称 = 编译后路径[编译后路径.rfind('/') + 1:]
+    app目录 = 编译后路径[: 编译后路径.rfind("/")]
+    app目录 = app目录[: app目录.rfind("/")]
+    父目录名称 = 编译后路径[编译后路径.rfind("/") + 1 :]
     if 父目录名称 == "MacOS":
         return app目录
     else:
         return ""
 
 
-def 更新自己MacOS应用(资源压缩包, 应用名称="my_app.app") -> tuple[Literal[True], str] | tuple[Literal[False], Literal['']] | None:
+def 更新自己MacOS应用(
+    资源压缩包, 应用名称="my_app.app"
+) -> tuple[Literal[True], str] | tuple[Literal[False], Literal[""]] | None:
     # 资源压缩包 = "/Users/chensuilong/Desktop/pythonproject/autotest/dist/my_app.2.0.zip"
     # 应用名称 例如 my_app.app 这你的压缩包里面压缩的应用文件夹名称
     MacOs应用路径 = 取自身MacOs应用路径()
     if MacOs应用路径 != "":
-        app目录父目录 = MacOs应用路径[:MacOs应用路径.rfind('/')]
+        app目录父目录 = MacOs应用路径[: MacOs应用路径.rfind("/")]
         print(f"资源压缩包 {资源压缩包} app目录父目录{app目录父目录} MacOs应用路径{MacOs应用路径}")
         if MacOs应用路径 != "":
-            zip解压2(资源压缩包, app目录父目录, [应用名称 + '/Contents/'])
+            zip解压2(资源压缩包, app目录父目录, [应用名称 + "/Contents/"])
             # 解压完成就压缩包
             os.remove(资源压缩包)
             MacOs应用路径 = os.path.join(app目录父目录, 应用名称)
             # QApplication.quit()
-            应用名称 = 应用名称[:应用名称.rfind('.')]
+            应用名称 = 应用名称[: 应用名称.rfind(".")]
             运行命令 = f"killall {应用名称} && open -n -a {MacOs应用路径}"
             os.system(运行命令)
             return True, MacOs应用路径
@@ -74,14 +76,14 @@ def 更新自己MacOS应用(资源压缩包, 应用名称="my_app.app") -> tuple
 
 
 def _取运行目录() -> str:
-    """ PyInstaller 单文件的运行目录  """
-    if getattr(sys, 'frozen', False):
+    """PyInstaller 单文件的运行目录"""
+    if getattr(sys, "frozen", False):
         return os.path.dirname(os.path.realpath(sys.argv[0]))
     else:
         return sys.path[0]
 
 
-def 初始化() -> tuple[Literal[False], Literal['']] | None:
+def 初始化() -> tuple[Literal[False], Literal[""]] | None:
     # 构建时测试运行是否正常的
     传入参数 = sys.argv
     if len(传入参数) == 2:
@@ -105,7 +107,7 @@ def 初始化() -> tuple[Literal[False], Literal['']] | None:
         os.remove(旧的文件名)
 
 
-def 更新自己Window应用(exe资源文件路径) -> tuple[Literal[False], Literal['']]:
+def 更新自己Window应用(exe资源文件路径) -> tuple[Literal[False], Literal[""]]:
     # window更新方法
     # exe资源文件路径 = r"C:\Users\csuil\.virtualenvs\QtEsayDesigner\Scripts\dist\my_app1.0.exe"
     自身路径Window = 取自身路径Window()
@@ -136,13 +138,13 @@ class 下载文件线程类(QThread):
 
     def __init__(self, *args, **kwargs):
         super(下载文件线程类, self).__init__()
-        self.窗口 = kwargs.get('窗口')
-        self.下载地址 = kwargs.get('下载地址')
-        self.保存地址 = kwargs.get('保存地址')
-        self.编辑框 = kwargs.get('编辑框')
-        self.进度条 = kwargs.get('进度条')
-        self.应用名称 = kwargs.get('应用名称')
-        self.回调函数 = kwargs.get('回调函数')
+        self.窗口 = kwargs.get("窗口")
+        self.下载地址 = kwargs.get("下载地址")
+        self.保存地址 = kwargs.get("保存地址")
+        self.编辑框 = kwargs.get("编辑框")
+        self.进度条 = kwargs.get("进度条")
+        self.应用名称 = kwargs.get("应用名称")
+        self.回调函数 = kwargs.get("回调函数")
 
         self.刷新进度条.connect(self.刷新界面)
 
@@ -167,7 +169,7 @@ class 下载文件线程类(QThread):
             self.下载结果 = False
 
     def ui_开始(self):
-        self.编辑框.setText(f'开始下载')
+        self.编辑框.setText(f"开始下载")
 
     def ui_结束(self):
         print("下载结果", self.下载结果)
@@ -183,9 +185,7 @@ class 下载文件线程类(QThread):
 
 
 class 检查更新线程(QThread):
-    def __init__(self,
-                 Github项目名称="sanbeicha/qtAutoUpdateApp",
-                 回调函数=None) -> None:
+    def __init__(self, Github项目名称="sanbeicha/qtAutoUpdateApp", 回调函数=None) -> None:
         super(检查更新线程, self).__init__()
         # 绑定线程开始事件
         self.started.connect(self.ui_开始)

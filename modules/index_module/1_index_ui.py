@@ -42,17 +42,13 @@ class Ui_MainWindow(object):
         # self.verticalLayout.addWidget(self.keywordInputs[0])
 
         # 增加输入框按钮
-        addButton_text = QCoreApplication.translate(
-            "MainWindow", "增加输入框", None
-        )
+        addButton_text = QCoreApplication.translate("MainWindow", "增加输入框", None)
         self.addButton = QPushButton(addButton_text)
         self.addButton.clicked.connect(self.addInputBox)
         self.verticalLayout.addWidget(self.addButton)
 
         # 检索按钮
-        searchButton_text = QCoreApplication.translate(
-            "MainWindow", "检索", None
-        )
+        searchButton_text = QCoreApplication.translate("MainWindow", "检索", None)
         searchButton = QPushButton(searchButton_text)
         searchButton.clicked.connect(self.search)
         self.verticalLayout.addWidget(searchButton)
@@ -75,9 +71,7 @@ class Ui_MainWindow(object):
 
         # 创建一个按钮
         # 使用翻译后的文本
-        button_text = QCoreApplication.translate(
-            "MainWindow", "点击下载", None
-        )
+        button_text = QCoreApplication.translate("MainWindow", "点击下载", None)
         button = QPushButton(button_text)
         self.verticalLayout.addWidget(button)  # 将按钮添加到布局中
 
@@ -102,13 +96,7 @@ class Ui_MainWindow(object):
 
     def perform_search(self):
         # 获取所有输入框的文本并组合显示在输出框中
-        search_terms = " ".join(
-            [
-                field.text()
-                for field in self.input_fields
-                if field.text().strip()
-            ]
-        )
+        search_terms = " ".join([field.text() for field in self.input_fields if field.text().strip()])
         self.output_area.setText(search_terms)
 
     def add_more_fields(self):
@@ -120,9 +108,7 @@ class Ui_MainWindow(object):
         newInput = QLineEdit()
         self.keywordInputs.append(newInput)
         self.verticalLayout.insertWidget(
-            self.verticalLayout.indexOf(
-                self.verticalLayout.itemAt(self.verticalLayout.count() - 3)
-            ),
+            self.verticalLayout.indexOf(self.verticalLayout.itemAt(self.verticalLayout.count() - 3)),
             newInput,
         )
 
@@ -131,11 +117,7 @@ class Ui_MainWindow(object):
 
     def search(self):
         # 获取所有输入框的文本并组合
-        keywords = [
-            input.text().strip()
-            for input in self.keywordInputs
-            if input.text().strip()
-        ]
+        keywords = [input.text().strip() for input in self.keywordInputs if input.text().strip()]
         if keywords:
             result = ", ".join(keywords)
             self.resultLabel.setText(f"检索词组合: {result}")
@@ -143,9 +125,7 @@ class Ui_MainWindow(object):
             self.resultLabel.setText("没有输入任何关键词。")
 
     def retranslateUi(self, MainWindow) -> None:
-        MainWindow.setWindowTitle(
-            QCoreApplication.translate("MainWindow", "SciHub文献下载", None)
-        )
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "SciHub文献下载", None))
         self.statusbar.showMessage(
             QCoreApplication.translate(
                 "MainWindow",

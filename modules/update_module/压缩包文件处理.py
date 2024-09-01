@@ -5,22 +5,22 @@ import zipfile
 
 def zip压缩2(压缩包的路径, 待压缩的文件或目录):
     # 使用递归实现的压缩
-    with zipfile.ZipFile(压缩包的路径, 'w', compression=zipfile.ZIP_DEFLATED) as 压缩包文件:
+    with zipfile.ZipFile(压缩包的路径, "w", compression=zipfile.ZIP_DEFLATED) as 压缩包文件:
         父目录文本长度 = len(os.path.dirname(待压缩的文件或目录))
 
         def 递归压缩(父目录):
             文件路径列表 = os.listdir(父目录)
             if not 文件路径列表:
                 # http://www.velocityreviews.com/forums/t318840-add-empty-directory-using-zipfile.html
-                根目录 = 父目录[父目录文本长度:].replace('\\', '/').lstrip('/')
-                压缩包信息 = zipfile.ZipInfo(根目录 + '/')
-                压缩包文件.writestr(压缩包信息, '')
+                根目录 = 父目录[父目录文本长度:].replace("\\", "/").lstrip("/")
+                压缩包信息 = zipfile.ZipInfo(根目录 + "/")
+                压缩包文件.writestr(压缩包信息, "")
             for 路径 in 文件路径列表:
                 文件绝对路径 = os.path.join(父目录, 路径)
                 if os.path.isdir(文件绝对路径) and not os.path.islink(文件绝对路径):
                     递归压缩(文件绝对路径)
                 else:
-                    根目录 = 文件绝对路径[父目录文本长度:].replace('\\', '/').lstrip('/')
+                    根目录 = 文件绝对路径[父目录文本长度:].replace("\\", "/").lstrip("/")
                     if os.path.islink(文件绝对路径):
                         # http://www.mail-archive.com/python-list@python.org/msg34223.html
                         压缩包信息 = zipfile.ZipInfo(根目录)
@@ -54,7 +54,7 @@ def zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[]):
 
         文件名 = info.filename
         try:
-            info.filename = 文件名.encode('cp437').decode('utf-8')
+            info.filename = 文件名.encode("cp437").decode("utf-8")
         except:
             pass
         # print("解压", 文件名)
@@ -110,10 +110,14 @@ def zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[]):
 # zip压缩2(压缩包的路径, 解压目录)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     压缩包的路径 = "/Users/chensuilong/Downloads/my_app.app.zip"
     解压目录 = r"/Users/chensuilong/Desktop/pythonproject/autotest/dist/"
-    zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[
-        "my_app.app/Contents/",
-    ])
+    zip解压2(
+        压缩包的路径,
+        解压目录,
+        允许解压路径前缀=[
+            "my_app.app/Contents/",
+        ],
+    )

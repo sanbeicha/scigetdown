@@ -7,12 +7,13 @@
 ###############################################################################
 
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import (QApplication, QMainWindow, QStyleFactory)
+from PySide6.QtWidgets import QApplication, QMainWindow, QStyleFactory
 import os
 import PySide6
+
 dirname = os.path.dirname(PySide6.__file__)
-plugin_path = os.path.join(dirname, 'plugins', 'platforms')
-os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
+plugin_path = os.path.join(dirname, "plugins", "platforms")
+os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = plugin_path
 
 from modules.index_module.index import Index
 
@@ -27,8 +28,8 @@ class Main(QMainWindow):
         self.index_ui.index_win.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = QApplication()
-    QApplication.setStyle(QStyleFactory.create('Fusion'))  # 设置界面风格
+    QApplication.setStyle(QStyleFactory.create("Fusion"))  # 设置界面风格
     main = Main()
     app.exec()

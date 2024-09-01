@@ -79,13 +79,7 @@ class Ui_MainWindow(object):
 
     def perform_search(self):
         # 获取所有输入框的文本并组合显示在输出框中
-        search_terms = " ".join(
-            [
-                field.text()
-                for field in self.input_fields
-                if field.text().strip()
-            ]
-        )
+        search_terms = " ".join([field.text() for field in self.input_fields if field.text().strip()])
         self.output_area.setText(search_terms)
 
     def add_more_fields(self):
@@ -95,9 +89,7 @@ class Ui_MainWindow(object):
         self.input_layout.insertWidget(len(self.input_fields) - 1, input_field)
 
     def retranslateUi(self, MainWindow) -> None:
-        MainWindow.setWindowTitle(
-            QCoreApplication.translate("MainWindow", "SciHub文献下载", None)
-        )
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "SciHub文献下载", None))
         self.statusbar.showMessage(
             QCoreApplication.translate(
                 "MainWindow",
