@@ -6,10 +6,11 @@
 ## 日期：2024-08-28
 ###############################################################################
 
+import os
+
+import PySide6
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QStyleFactory
-import os
-import PySide6
 
 dirname = os.path.dirname(PySide6.__file__)
 plugin_path = os.path.join(dirname, "plugins", "platforms")

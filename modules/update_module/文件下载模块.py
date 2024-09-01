@@ -1,6 +1,7 @@
 # requests 文件下载的模块带进度
-import requests
 import time
+
+import requests
 
 
 def 下载文件进度条(url, 保存地址):

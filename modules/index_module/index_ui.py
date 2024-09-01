@@ -11,7 +11,8 @@
 ################################################################################
 
 from PySide6.QtCore import QCoreApplication, QMetaObject, QRect
-from PySide6.QtWidgets import QMenuBar, QPushButton, QStatusBar, QWidget, QVBoxLayout
+from PySide6.QtWidgets import QMenuBar, QPushButton, QStatusBar, QVBoxLayout, QWidget
+
 from ..utils.init_menu import init_menu
 
 

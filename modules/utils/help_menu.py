@@ -13,7 +13,8 @@
 # ///////////////////////////////////////////////////////////////
 
 
-from PySide6.QtWidgets import QMessageBox, QDialog, QTextEdit, QPushButton, QVBoxLayout
+from PySide6.QtWidgets import QDialog, QMessageBox, QPushButton, QTextEdit, QVBoxLayout
+
 import version
 
 from .. import update_module as 自动更新模块

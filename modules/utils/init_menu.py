@@ -9,9 +9,14 @@
 #
 # ///////////////////////////////////////////////////////////////
 from PySide6.QtCore import QCoreApplication
-from PySide6.QtWidgets import QMenu
 from PySide6.QtGui import QAction, QKeySequence
-from .help_menu import on_about_soft_clicked, on_about_develop_clicked, on_update_soft_clicked
+from PySide6.QtWidgets import QMenu
+
+from .help_menu import (
+    on_about_develop_clicked,
+    on_about_soft_clicked,
+    on_update_soft_clicked,
+)
 
 
 def init_menu(self) -> None:

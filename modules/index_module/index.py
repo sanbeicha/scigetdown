@@ -10,15 +10,16 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ###############################################################################
 
-from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QMainWindow
 import re
 import warnings
 
-# from scholarly import scholarly
-# from scihub_cn.scihub import SciHub
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QMainWindow
 
 from .index_ui import Ui_MainWindow
+
+# from scholarly import scholarly
+# from scihub_cn.scihub import SciHub
 
 
 class Index(QMainWindow, Ui_MainWindow):
