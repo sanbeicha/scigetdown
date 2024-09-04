@@ -53,11 +53,8 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-# import update_image_rc
-
-
 class Ui_Form(object):
-    def setupUi(self, Form):
+    def setupUi(self, Form) -> None:
         if not Form.objectName():
             Form.setObjectName("Form")
         Form.resize(510, 301)
@@ -172,7 +169,7 @@ class Ui_Form(object):
 
     # setupUi
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Form) -> None:
         Form.setWindowTitle(QCoreApplication.translate("Form", "\u8f6f\u4ef6\u66f4\u65b0", None))
         self.label.setText("")
         self.label_2.setText(QCoreApplication.translate("Form", "\u53d1\u73b0\u65b0\u7248\u672c", None))
@@ -189,5 +186,3 @@ class Ui_Form(object):
         self.pushButton_gfwz.setText(QCoreApplication.translate("Form", "\u5b98\u65b9\u7f51\u5740", None))
         self.pushButton_azgx.setText(QCoreApplication.translate("Form", "\u5b89\u88c5\u66f4\u65b0", None))
         self.pushButton_ok.setText(QCoreApplication.translate("Form", "\u786e\u5b9a", None))
-
-    # retranslateUi

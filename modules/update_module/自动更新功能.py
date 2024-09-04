@@ -153,7 +153,7 @@ class 下载文件线程类(QThread):
         # 绑定线程结束事件
         self.finished.connect(self.ui_结束)
 
-    def run(self):
+    def run(self) -> None:
         if self.下载地址 == None:
             print("请传入下载地址")
             return
@@ -168,16 +168,16 @@ class 下载文件线程类(QThread):
         except:
             self.下载结果 = False
 
-    def ui_开始(self):
+    def ui_开始(self) -> None:
         self.编辑框.setText(f"开始下载")
 
-    def ui_结束(self):
+    def ui_结束(self) -> None:
         print("下载结果", self.下载结果)
         print("保存地址", self.保存地址)
         self.回调函数(self.下载结果, self.保存地址)
         self.编辑框.setText(f"下载完成 {self.保存地址}")
 
-    def 刷新界面(self, 进度, 信息):
+    def 刷新界面(self, 进度, 信息) -> None:
         if self.编辑框:
             self.编辑框.setText(str(信息))
         if self.进度条:

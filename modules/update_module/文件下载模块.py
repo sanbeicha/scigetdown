@@ -1,10 +1,11 @@
 # requests 文件下载的模块带进度
 import time
+from typing import Literal
 
 import requests
 
 
-def 下载文件进度条(url, 保存地址):
+def 下载文件进度条(url, 保存地址) -> bool:
     # 终端的进度条
     try:
         from tqdm import tqdm
@@ -23,7 +24,7 @@ def 下载文件进度条(url, 保存地址):
     return True
 
 
-def 下载文件(url, 保存地址, 回调函数=None):
+def 下载文件(url, 保存地址, 回调函数=None) -> Literal[True]:
     # 回调函数例子
     #     def 进度(进度百分比, 已下载大小, 文件大小, 下载速率, 剩余时间):
     #         信息 = f"进度 {进度百分比}% 已下载 {已下载大小}MB 文件大小 {文件大小}MB 下载速率 {下载速率}MB 剩余时间 {剩余时间}秒"

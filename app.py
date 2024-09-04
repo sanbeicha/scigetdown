@@ -31,6 +31,7 @@ class Main(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication()
-    QApplication.setStyle(QStyleFactory.create("Fusion"))  # 设置界面风格
+    # 设置界面风格
+    QApplication.setStyle(QStyleFactory.create("Fusion"))
     main = Main()
     app.exec()

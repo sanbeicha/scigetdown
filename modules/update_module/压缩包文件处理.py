@@ -1,9 +1,10 @@
 import os
 import stat
+from typing import Literal
 import zipfile
 
 
-def zip压缩2(压缩包的路径, 待压缩的文件或目录):
+def zip压缩2(压缩包的路径, 待压缩的文件或目录) -> Literal[True]:
     # 使用递归实现的压缩
     with zipfile.ZipFile(压缩包的路径, "w", compression=zipfile.ZIP_DEFLATED) as 压缩包文件:
         父目录文本长度 = len(os.path.dirname(待压缩的文件或目录))
@@ -36,7 +37,7 @@ def zip压缩2(压缩包的路径, 待压缩的文件或目录):
     return True
 
 
-def zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[]):
+def zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[]) -> Literal[True]:
     # 保持权限和软连接解压
     # 允许解压路径前缀 例如 ["my_app.app/Contents/"] 不填则全部解压
 
@@ -84,30 +85,6 @@ def zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[]):
                 os.chmod(目标文件路径, 权限)
 
     return True
-
-
-#
-# 压缩包的路径 = "/Users/chensuilong/Desktop/pythonproject/autotest/dist/my_app.2.0.zip"
-# 解压目录 = r"/Users/chensuilong/Desktop/pythonproject/autotest/testzip"
-# zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[
-#     "my_app.app/Contents/",
-# ])
-
-
-# 压缩包的路径 = "/Users/chensuilong/Desktop/pythonproject/autotest/dist/test2.zip"
-# 解压目录 = r"/Users/chensuilong/Desktop/pythonproject/autotest/testzip/my_app.app"
-# zip压缩(压缩包的路径, 解压目录)
-
-#
-# 压缩包的路径 = "/Users/chensuilong/Desktop/pythonproject/autotest/app_MacOS.zip"
-# 解压目录 = r"/Users/chensuilong/Desktop/pythonproject/autotest/testzip"
-# zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[
-#     "app.app/Contents/",
-# ])
-
-# 压缩包的路径 = "/Users/chensuilong/Desktop/pythonproject/autotest/dist/test3.zip"
-# 解压目录 = r"/Users/chensuilong/Desktop/pythonproject/autotest/testzip/app.app"
-# zip压缩2(压缩包的路径, 解压目录)
 
 
 if __name__ == "__main__":
