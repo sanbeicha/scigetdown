@@ -17,6 +17,7 @@ from PySide6.QtWidgets import (
     QTextEdit,
     QVBoxLayout,
     QWidget,
+    QHBoxLayout,
 )
 
 from ..utils.init_menu import init_menu
@@ -47,10 +48,11 @@ class Ui_MainWindow(object):
         # self.setMenuBar(self.menubar)
 
         # 创建水平布局用于输入框和按钮
-        # input_layout = QHBoxLayout()
+        input_layout = QHBoxLayout()
         self.input_fields = []
         # self.add_input_field(input_layout)
-        input_layout = self.addInputFields()
+        self.addInputFields(input_layout)
+        # input_layout = self.addInputFields()
 
         self.addButtons(input_layout)
 
@@ -85,7 +87,7 @@ class Ui_MainWindow(object):
 
         QMetaObject.connectSlotsByName(MainWindow)
 
-    def add_input_field(self, layout):
+    def addInputFields(self, layout):
         # 创建一个新的输入框并添加到布局中
         input_field = QLineEdit()
         layout.addWidget(input_field)
