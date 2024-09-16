@@ -23,6 +23,30 @@ from PySide6.QtWidgets import (
     QMenuBar,
     QHBoxLayout,
 )
+# ///////////////////////////////////////////////////
+# 博航纳影sci文献下载软件
+# 版权所有 @2024 博航纳影科技有限公司
+# 作者：博航纳影科技有限公司
+# 日期：2024-08-28
+# 本模块提供首页展示
+# v4.0
+# ///////////////////////////////////////////////////
+from PySide6.QtCore import QCoreApplication, QMetaObject, Qt
+from PySide6.QtGui import QIntValidator
+from PySide6.QtWidgets import (
+    QMessageBox,
+    QStatusBar,
+    QTextEdit,
+    QPushButton,
+    QSpacerItem,
+    QSizePolicy,
+    QComboBox,
+    QLineEdit,
+    QVBoxLayout,
+    QWidget,
+    QMenuBar,
+    QHBoxLayout,
+)
 
 from ..utils.init_menu import init_menu
 
@@ -61,11 +85,33 @@ class Ui_MainWindow(object):
         self.output_area.setReadOnly(True)
         # self.verticalLayout.addLayout(input_layout)
         self.verticalLayout.addWidget(self.output_area)
+        MainWindow.setMenuBar(self.menubar)
+
+        self.input_fields = []  # 存储每个输入字段和下拉框的组合
+        self.input_layouts = []  # 存储每个输入字段的布局
+        self.condition_combos = []  # 存储条件组合框的引用
+        input_layout = self.addInputFields()
+
+        self.addButtons(input_layout)
+
+        # 添加一个间隔，确保文本区域在输入框下方
+        self.verticalLayout.addLayout(input_layout)
+        spacer_item = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalLayout.addSpacerItem(spacer_item)
+
+        self.output_area = QTextEdit()
+        self.output_area.setReadOnly(True)
+        # self.verticalLayout.addLayout(input_layout)
+        self.verticalLayout.addWidget(self.output_area)
 
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        # 直接设置窗口标题
+        # MainWindow.setWindowTitle("SciHub文献下载")
+        # 直接设置状态栏消息
+        # self.statusbar.showMessage("欢迎使用SciHub文献批量下载软件")
         # 直接设置窗口标题
         # MainWindow.setWindowTitle("SciHub文献下载")
         # 直接设置状态栏消息
@@ -234,4 +280,5 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow) -> None:
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "SciHub文献下载", None))
+        self.statusbar.showMessage(QCoreApplication.translate("MainWindow", "欢迎使用SciHub文献批量下载软件", None))
         self.statusbar.showMessage(QCoreApplication.translate("MainWindow", "欢迎使用SciHub文献批量下载软件", None))
