@@ -55,17 +55,3 @@ def 下载文件(url, 保存地址, 回调函数=None) -> Literal[True]:
                     进度百分比 = round(进度百分比, 2)
                     回调函数(进度百分比, 已下载大小, 文件大小MB, 下载速率MB, 剩余时间)
     return True
-
-
-if __name__ == "__main__":
-    # 下载一个大一点的文件
-    def 进度(进度百分比, 已下载大小, 文件大小, 下载速率, 剩余时间):
-        信息 = f"进度 {进度百分比}% 已下载 {已下载大小}MB 文件大小 {文件大小}MB 下载速率 {下载速率}MB 剩余时间 {剩余时间}秒"
-        # 控制台当行输出
-        print(f"\r {信息}", end="")
-
-    下载文件(
-        "https://github.com/duolabmeng6/QtEsayDesigner/releases/download/0.0.32/QtEsayDesigner_MacOS.zip",
-        "QtEsayDesigner_MacOS.zip",
-        进度,
-    )
