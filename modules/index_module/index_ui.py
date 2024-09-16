@@ -128,7 +128,6 @@ class Ui_MainWindow(object):
     def update_input_logic(self) -> None:
         combo_box = self.sender()
         for i, (layout, combo_box, condition_combo, input_field, button) in enumerate(self.input_fields):
-            # if combo_box == combo_box:
             if combo_box == self.sender():
                 field_type = combo_box.currentText()
                 if field_type == "发表年份":
