@@ -136,7 +136,7 @@ class Ui_MainWindow(object):
                 self.input_fields.pop(i)
                 break
 
-    def update_input_logic(self):
+    def update_input_logic(self) -> None:
         combo_box = self.sender()
         for i, (layout, logic_combo_box, combo_box, condition_combo, input_field, button) in enumerate(
             self.input_fields
@@ -149,7 +149,6 @@ class Ui_MainWindow(object):
                         condition_combo.addItems(["等于", "大于", "小于"])
                         insert_position = layout.indexOf(input_field) if layout.count() > 1 else 1
                         layout.insertWidget(insert_position, condition_combo)
-                        # layout.insertWidget(2, condition_combo)
                         self.input_fields[i] = (
                             layout,
                             logic_combo_box,
@@ -158,8 +157,6 @@ class Ui_MainWindow(object):
                             input_field,
                             button,
                         )
-                    # condition = condition_combo.currentText()
-                    # input_field.setPlaceholderText(f"请输入{condition}年份")
                     input_field.setPlaceholderText("请输入年份")
                     condition_combo.currentIndexChanged.connect(lambda: self.update_condition_input(i))
                     validator = QIntValidator(1000, 9999)
@@ -173,7 +170,7 @@ class Ui_MainWindow(object):
                         self.input_fields[i] = (layout, logic_combo_box, combo_box, None, input_field, button)
                 break
 
-    def update_condition_input(self, index):
+    def update_condition_input(self, index) -> None:
         condition = self.input_fields[index][3].currentText() if self.input_fields[index][3] else ""
         input_field = self.input_fields[index][4]
         input_field.setPlaceholderText(f"请输入{condition}年份")
@@ -196,7 +193,7 @@ class Ui_MainWindow(object):
         else:
             QMessageBox.warning(None, "提醒", "已达最大输入框数量限制。")
 
-    def update_logic_relation(self):
+    def update_logic_relation(self) -> None:
         logic_combo_box = self.sender()
         # 这里可以获取当前选择的逻辑关系，并保存到一个变量中
         selected_logic = logic_combo_box.currentText()
@@ -207,10 +204,9 @@ class Ui_MainWindow(object):
                 # 找到对应的索引并更新
                 index = self.input_fields.index(item)
                 self.input_fields[index] = item
-                # self.input_fields[self.input_fields.index((layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button))][4] = selected_logic
                 break
 
-    def perform_search(self):
+    def perform_search(self) -> None:
         search_query = ""
         # 根据每个输入字段构建搜索查询
         for i, (layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button) in enumerate(
@@ -227,10 +223,6 @@ class Ui_MainWindow(object):
                     condition_combo_value = condition_combo.currentText()
                     search_query += field_type + condition_combo_value + ':"' + field_value + '"'
                 search_query += field_type + ':"' + field_value + '"'
-
-        # search_terms = " ".join(
-        #     [input_field.text() for _, _, _, _, input_field, _ in self.input_fields if input_field.text().strip()]
-        # )
         self.output_area.setText(search_query if search_query else "没有输入任何关键词。")
 
     def retranslateUi(self, MainWindow) -> None:
