@@ -7,7 +7,7 @@
 # 本模块提供首页展示
 # v4.0
 # ///////////////////////////////////////////////////
-from PySide6.QtCore import QCoreApplication, QMetaObject, Qt
+from PySide6.QtCore import QCoreApplication, QMetaObject
 from PySide6.QtGui import QIntValidator
 from PySide6.QtWidgets import (
     QMessageBox,
@@ -59,7 +59,6 @@ class Ui_MainWindow(object):
 
         self.output_area = QTextEdit()
         self.output_area.setReadOnly(True)
-        # self.verticalLayout.addLayout(input_layout)
         self.verticalLayout.addWidget(self.output_area)
 
         self.statusbar = QStatusBar(MainWindow)
@@ -99,10 +98,15 @@ class Ui_MainWindow(object):
             delete_button = QPushButton("删除")
             delete_button.clicked.connect(self.delete_input_field)
             layout.addWidget(delete_button)
-            # self.input_fields.append((layout, combo_box, None, input_field, delete_button))
+
+            logic_combo_box = QComboBox()
+            logic_combo_box.addItems(["AND", "OR"])
+            logic_combo_box.setToolTip("选择逻辑关系：AND 或 OR")
+            logic_combo_box.currentIndexChanged.connect(self.update_logic_relation)
+            layout.insertWidget(0, logic_combo_box)
         else:
             delete_button = None
-            # self.input_fields.append((layout, combo_box, None, input_field, None))
+            logic_combo_box = None
 
         condition_combo = None
         if combo_box.currentText() == "发表年份":
@@ -110,14 +114,15 @@ class Ui_MainWindow(object):
             condition_combo.addItems(["等于", "大于", "小于"])
             layout.addWidget(condition_combo)
 
-        self.input_fields.append((layout, combo_box, condition_combo, input_field, delete_button))
+        self.input_fields.append((layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button))
 
     def delete_input_field(self):
         # 获取发送事件的按钮
         delete_button = self.sender()
         # 遍历 input_fields 列表，找到对应的删除按钮
-        for i, (layout, combo_box, condition_combo, input_field, button) in enumerate(self.input_fields):
-            # for layout, combo_box, condition_combo, input_field, button in self.input_fields:
+        for i, (layout, logic_combo_box, combo_box, condition_combo, input_field, button) in enumerate(
+            self.input_fields
+        ):
             if button == delete_button:
                 if condition_combo is not None:
                     layout.removeWidget(condition_combo)
@@ -127,58 +132,39 @@ class Ui_MainWindow(object):
                 layout.removeWidget(combo_box)
                 layout.removeWidget(input_field)
                 layout.removeWidget(button)
+                layout.removeWidget(logic_combo_box)
 
                 # 删除控件
                 combo_box.deleteLater()
                 input_field.deleteLater()
                 button.deleteLater()
+                logic_combo_box.deleteLater()
 
                 self.input_fields.pop(i)
-
-                # 从列表中移除对应的元素
-                # self.input_fields.remove((layout, combo_box, condition_combo, input_field, button))
-                # self.input_fields = [field for field in self.input_fields if field[1] != condition_combo]
-
                 break
-
-    # def update_input_logic(self):
-    #     combo_box = self.sender()
-    #     for layout, combo, condition_combo, input_field, _ in self.input_fields:
-    #         if combo == combo_box:
-    #             field_type = combo_box.currentText()
-    #             if field_type == "发表年份":
-    #                 if condition_combo is None:
-    #                     condition_combo = QComboBox()
-    #                     condition_combo.addItems(["等于", "大于", "小于"])
-    #                     # 将条件组合框插入到 combo_box 和 input_field 之间
-    #                     layout.insertWidget(1, condition_combo)
-    #                     self.condition_combos.append(condition_combo)
-    #                 condition = condition_combo.currentText()
-    #                 input_field.setPlaceholderText(f"请输入{condition}年份")
-    #                 validator = QIntValidator(1900, 2050)
-    #                 input_field.setValidator(validator)  # 设置年份验证器
-    #             else:
-    #                 input_field.setPlaceholderText("请输入" + field_type)
-    #                 input_field.setValidator(None)  # 清除验证器
-    #                 if condition_combo is not None:
-    #                     layout.removeWidget(condition_combo)
-    #                     condition_combo.deleteLater()
-    #                     condition_combo = None
-    #                     self.input_fields[self.input_fields.index((layout, combo, condition_combo, input_field))] = (layout, combo, condition_combo, input_field)
-    #             break
 
     def update_input_logic(self):
         combo_box = self.sender()
-        for i, (layout, combo_box, condition_combo, input_field, button) in enumerate(self.input_fields):
-            # if combo_box == combo_box:
+        for i, (layout, logic_combo_box, combo_box, condition_combo, input_field, button) in enumerate(
+            self.input_fields
+        ):
             if combo_box == self.sender():
                 field_type = combo_box.currentText()
                 if field_type == "发表年份":
                     if condition_combo is None:
                         condition_combo = QComboBox()
                         condition_combo.addItems(["等于", "大于", "小于"])
-                        layout.insertWidget(1, condition_combo)
-                        self.input_fields[i] = (layout, combo_box, condition_combo, input_field, button)
+                        insert_position = layout.indexOf(input_field) if layout.count() > 1 else 1
+                        layout.insertWidget(insert_position, condition_combo)
+                        # layout.insertWidget(2, condition_combo)
+                        self.input_fields[i] = (
+                            layout,
+                            logic_combo_box,
+                            combo_box,
+                            condition_combo,
+                            input_field,
+                            button,
+                        )
                     # condition = condition_combo.currentText()
                     # input_field.setPlaceholderText(f"请输入{condition}年份")
                     input_field.setPlaceholderText("请输入年份")
@@ -191,12 +177,12 @@ class Ui_MainWindow(object):
                     if condition_combo:
                         layout.removeWidget(condition_combo)
                         condition_combo.deleteLater()
-                        self.input_fields[i] = (layout, combo_box, None, input_field, button)
+                        self.input_fields[i] = (layout, logic_combo_box, combo_box, None, input_field, button)
                 break
 
     def update_condition_input(self, index):
-        condition = self.input_fields[index][2].currentText()
-        input_field = self.input_fields[index][3]
+        condition = self.input_fields[index][3].currentText() if self.input_fields[index][3] else ""
+        input_field = self.input_fields[index][4]
         input_field.setPlaceholderText(f"请输入{condition}年份")
 
     def addButtons(self, layout):
@@ -226,12 +212,42 @@ class Ui_MainWindow(object):
         else:
             QMessageBox.warning(None, "提醒", "已达最大输入框数量限制。")
 
+    def update_logic_relation(self):
+        logic_combo_box = self.sender()
+        # 这里可以获取当前选择的逻辑关系，并保存到一个变量中
+        selected_logic = logic_combo_box.currentText()
+        # 例如，你可以将这个变量保存到 self.input_fields 的每个元素中
+        for layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button in self.input_fields:
+            if logic_combo_box == self.sender():
+                item = (layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button)
+                # 找到对应的索引并更新
+                index = self.input_fields.index(item)
+                self.input_fields[index] = item
+                # self.input_fields[self.input_fields.index((layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button))][4] = selected_logic
+                break
+
     def perform_search(self):
-        # search_terms = ' '.join([field[0].text() for field in self.input_fields if field[0].text().strip()])
-        search_terms = " ".join(
-            [input_field.text() for _, _, _, input_field, _ in self.input_fields if input_field.text().strip()]
-        )
-        self.output_area.setText(search_terms if search_terms else "没有输入任何关键词。")
+        search_query = ""
+        # 根据每个输入字段构建搜索查询
+        for i, (layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button) in enumerate(
+            self.input_fields
+        ):
+            field_type = combo_box.currentText()
+            field_value = input_field.text().strip()
+            if logic_combo_box is not None:
+                logic_combo_value = logic_combo_box.currentText()
+            if field_value:
+                if i > 0:  # 如果不是第一个字段，添加逻辑关系
+                    search_query += " " + logic_combo_value + " "
+                if condition_combo is not None:
+                    condition_combo_value = condition_combo.currentText()
+                    search_query += field_type + condition_combo_value + ':"' + field_value + '"'
+                search_query += field_type + ':"' + field_value + '"'
+
+        # search_terms = " ".join(
+        #     [input_field.text() for _, _, _, _, input_field, _ in self.input_fields if input_field.text().strip()]
+        # )
+        self.output_area.setText(search_query if search_query else "没有输入任何关键词。")
 
     def retranslateUi(self, MainWindow) -> None:
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "SciHub文献下载", None))
