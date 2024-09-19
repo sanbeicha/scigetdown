@@ -5,6 +5,17 @@ import zipfile
 
 
 def zip压缩2(压缩包的路径, 待压缩的文件或目录) -> Literal[True]:
+    """
+    递归地将指定文件或目录压缩成zip格式的文件。
+
+    Args:
+        压缩包的路径 (str): 压缩后的zip文件保存路径。
+        待压缩的文件或目录 (str): 需要被压缩的文件或目录路径。
+
+    Returns:
+        Literal[True]: 压缩完成后返回True，表示压缩成功。
+
+    """
     # 使用递归实现的压缩
     with zipfile.ZipFile(压缩包的路径, "w", compression=zipfile.ZIP_DEFLATED) as 压缩包文件:
         父目录文本长度 = len(os.path.dirname(待压缩的文件或目录))
@@ -38,9 +49,18 @@ def zip压缩2(压缩包的路径, 待压缩的文件或目录) -> Literal[True]
 
 
 def zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[]) -> Literal[True]:
-    # 保持权限和软连接解压
-    # 允许解压路径前缀 例如 ["my_app.app/Contents/"] 不填则全部解压
+    """
+    解压zip文件，支持保持权限和软连接。
 
+    Args:
+        压缩包的路径 (str): zip文件的路径。
+        解压目录 (str): 解压的目标目录。
+        允许解压路径前缀 (List[str], optional): 允许解压的文件路径前缀列表。默认为空列表，表示解压所有文件。
+
+    Returns:
+        Literal[True]: 解压成功返回True。
+
+    """
     file = zipfile.ZipFile(压缩包的路径)
     for info in file.infolist():
         # 检查 目标文件路径 是否在 允许解压路径前缀 中
@@ -65,7 +85,7 @@ def zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[]) ->
         权限 = info.external_attr >> 16
         if stat.S_ISLNK(权限):  # 权限 == 'lrwxr-xr-x' 权限 = stat.filemode(权限)
             软连接位置 = file.open(info).read()  # 读入软连接的位置
-            # 检查 目标文件路径 是否存在，如果存在就删除 防止创建失败
+            # 检查 目标文件路径 是否存在，如果存在就删除，防止创建失败
             if os.path.exists(目标文件路径):
                 os.remove(目标文件路径)
             # ic(目标文件路径, 软连接位置)
@@ -88,7 +108,6 @@ def zip解压2(压缩包的路径, 解压目录, 允许解压路径前缀=[]) ->
 
 
 if __name__ == "__main__":
-
     压缩包的路径 = "/Users/chensuilong/Downloads/my_app.app.zip"
     解压目录 = r"/Users/chensuilong/Desktop/pythonproject/autotest/dist/"
     zip解压2(
