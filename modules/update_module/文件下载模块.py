@@ -1,6 +1,7 @@
 # requests 文件下载的模块带进度
 import time
 from typing import Literal
+from tqdm import tqdm
 
 import requests
 
@@ -17,13 +18,6 @@ def 下载文件进度条(url, 保存地址) -> bool:
         bool: 下载是否成功，成功返回True，失败返回False。
 
     """
-    # 终端的进度条
-    try:
-        from tqdm import tqdm
-    except ImportError:
-        print("请安装 pip install tqdm")
-        return False
-
     r = requests.get(url, stream=True)
     with open(保存地址, "wb") as f:
         total_length = int(r.headers.get("content-length"))
