@@ -71,6 +71,20 @@ class 窗口_更新软件(QDialog):
             event.ignore()
 
     def 检查更新回到回调函数(self, 数据) -> None:
+        """
+        更新软件版本信息并展示给用户。
+
+        Args:
+            self (object): 类实例对象
+            数据 (dict): 包含更新信息的字典，包含以下键:
+                - 版本号 (str): 最新版本的版本号
+                - 更新内容 (str): 最新版本的更新内容
+                - mac下载地址 (str): Mac系统下的软件下载地址
+                - win下载地址 (str): Windows系统下的软件下载地址
+
+        Returns:
+            None
+        """
         # print("数据", 数据)
         最新版本 = 数据["版本号"]
         self.ui.label_bbh.setText(f"最新版本: {最新版本} 当前版本: {self.当前版本号}")
