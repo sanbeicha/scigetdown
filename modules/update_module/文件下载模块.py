@@ -6,6 +6,17 @@ import requests
 
 
 def 下载文件进度条(url, 保存地址) -> bool:
+    """
+    从指定URL下载文件并保存至指定地址，同时在终端显示下载进度条。
+
+    Args:
+        url (str): 下载文件的URL地址。
+        保存地址 (str): 下载文件保存的本地路径和文件名。
+
+    Returns:
+        bool: 下载是否成功，成功返回True，失败返回False。
+
+    """
     # 终端的进度条
     try:
         from tqdm import tqdm
