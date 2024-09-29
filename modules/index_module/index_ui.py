@@ -31,6 +31,15 @@ class Ui_MainWindow(object):
     MAX_INPUT_FIELDS = 10  # 定义最大输入框数量
 
     def setupUi(self, MainWindow) -> None:
+        """
+        设置主窗口的UI界面。
+
+        Args:
+            MainWindow (QMainWindow): 主窗口对象。
+
+        Returns:
+            None
+        """
         if not MainWindow.objectName():
             MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -70,12 +79,31 @@ class Ui_MainWindow(object):
         QMetaObject.connectSlotsByName(MainWindow)
 
     def addInputFields(self) -> QHBoxLayout:
+        """
+        将输入框内容添加到水平布局中，并返回该布局。
+
+        Args:
+            无。
+
+        Returns:
+            QHBoxLayout: 包含输入字段的水平布局对象。
+
+        """
         layout = QHBoxLayout()
         self.add_input_field(layout)
         self.input_layouts.append(layout)  # 将布局添加到 input_layouts 列表
         return layout
 
     def add_input_field(self, layout) -> None:
+        """
+        向输入框布局中添加可让用户输入的字段。
+
+        Args:
+            layout: 用于添加组件的布局。
+
+        Returns:
+            None.
+        """
         combo_box = QComboBox()
         combo_box.addItems(["关键词", "作者", "论文标题", "发表年份", "DOI"])
         combo_box.currentIndexChanged.connect(self.update_input_logic)
@@ -110,6 +138,16 @@ class Ui_MainWindow(object):
         self.input_fields.append((layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button))
 
     def delete_input_field(self) -> None:
+        """
+        点击删除按钮时，删除指定的输入字段。
+
+        Args:
+            无
+
+        Returns:
+            None
+
+        """
         # 获取发送事件的按钮
         delete_button = self.sender()
         # 遍历 input_fields 列表，找到对应的删除按钮
@@ -137,6 +175,16 @@ class Ui_MainWindow(object):
                 break
 
     def update_input_logic(self) -> None:
+        """
+        根据下拉框选择更新输入逻辑。
+
+        Args:
+            无
+
+        Returns:
+            None
+
+        """
         combo_box = self.sender()
         for i, (layout, logic_combo_box, combo_box, condition_combo, input_field, button) in enumerate(
             self.input_fields
@@ -171,11 +219,29 @@ class Ui_MainWindow(object):
                 break
 
     def update_condition_input(self, index) -> None:
+        """
+        更新条件输入框的占位符文本。
+
+        Args:
+            index (int): 输入框的索引。
+
+        Returns:
+            None: 该函数无返回值。
+        """
         condition = self.input_fields[index][3].currentText() if self.input_fields[index][3] else ""
         input_field = self.input_fields[index][4]
         input_field.setPlaceholderText(f"请输入{condition}年份")
 
     def addButtons(self, layout) -> None:
+        """
+        为第一个布局的输入框后面添加两个按钮：添加和检索。
+
+        Args:
+            layout (QLayout): 需要添加按钮的布局。
+
+        Returns:
+            None.
+        """
         add_button = QPushButton("添加")
         add_button.clicked.connect(self.addInputBox)
         layout.addWidget(add_button)
@@ -185,6 +251,16 @@ class Ui_MainWindow(object):
         layout.addWidget(search_button)
 
     def addInputBox(self) -> None:
+        """
+        添加输入框到窗口中，并且限制了增加的的输入框最大个数。
+
+        Args:
+            无参数。
+
+        Returns:
+            None。
+
+        """
         if len(self.input_fields) < self.MAX_INPUT_FIELDS:
             new_layout = QHBoxLayout()
             self.add_input_field(new_layout)
@@ -194,10 +270,17 @@ class Ui_MainWindow(object):
             QMessageBox.warning(None, "提醒", "已达最大输入框数量限制。")
 
     def update_logic_relation(self) -> None:
+        """
+        新增输入框后，切换选择逻辑关系时及时更新逻辑关系。
+
+        Args:
+            无。
+
+        Returns:
+            None。
+
+        """
         logic_combo_box = self.sender()
-        # 这里可以获取当前选择的逻辑关系，并保存到一个变量中
-        selected_logic = logic_combo_box.currentText()
-        # 例如，你可以将这个变量保存到 self.input_fields 的每个元素中
         for layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button in self.input_fields:
             if logic_combo_box == self.sender():
                 item = (layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button)
@@ -207,6 +290,16 @@ class Ui_MainWindow(object):
                 break
 
     def perform_search(self) -> None:
+        """
+        根据输入的字段构建搜索查询串，并将结果输出到输出区域。
+
+        Args:
+            无参数。
+
+        Returns:
+            None. 搜索结果将直接输出到输出区域，无返回值。
+
+        """
         search_query = ""
         # 根据每个输入字段构建搜索查询
         for i, (layout, logic_combo_box, combo_box, condition_combo, input_field, delete_button) in enumerate(
@@ -226,5 +319,14 @@ class Ui_MainWindow(object):
         self.output_area.setText(search_query if search_query else "没有输入任何关键词。")
 
     def retranslateUi(self, MainWindow) -> None:
+        """
+        设置主窗口标题栏和状态栏的文本信息
+
+        Args:
+            MainWindow (QMainWindow): 主窗口对象
+
+        Returns:
+            None
+        """
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", "SciHub文献下载", None))
         self.statusbar.showMessage(QCoreApplication.translate("MainWindow", "欢迎使用SciHub文献批量下载软件", None))
